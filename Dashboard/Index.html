@@ -111,11 +111,6 @@
                         <!--<h4>Line Chart</h4>-->
                         <span class="text-bold">Transaction Trend</span>
                     </div>
-                    <!--<div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                        <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
-                    </div>-->
                 </div>
                 <h2 class="sub-header">Top Ten Transactions</h2>
                 <div class="table-responsive">
@@ -260,7 +255,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
     <script>
-
+        var selectedIndex = null;
         var pieChart1 = $("#myChart1");
         var myChart1 = new Chart(pieChart1, {
             type: 'pie',
@@ -278,16 +273,30 @@
                         'rgba(255, 159, 64, 1)'
                     ]
                 }],
-
-                // These labels appear in the legend and in the tooltips when hovering different arcs
                 labels: [
                     'Red',
                     'Yellow',
                     'Blue'
                 ]
-
             },
-            options: Chart.defaults.pie
+            options: {
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart1.update();
+                        if (selectedIndex !== segment["_index"]) {
+                            selectedIndex = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
         });
 
         var pieChart2 = $("#myChart2");
@@ -297,13 +306,11 @@
                 datasets: [{
                     data: [10, 20, 30],
                     backgroundColor: [
-
                     'rgb(75, 192, 192)',
                     'rgb(153, 102, 255)',
                     'rgb(255, 159, 64)'
                     ]
                 }],
-
                 // These labels appear in the legend and in the tooltips when hovering different arcs
                 labels: [
                     'Red',
@@ -311,10 +318,25 @@
                     'Blue'
                 ]
             },
-            options: Chart.defaults.pie
+            options: {
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart2.update();
+                        if (selectedIndex !== segment["_index"]) {
+                            selectedIndex = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
         });
-
-    
 
         var lineChart = $("#myChart3");
         var myChart = new Chart(lineChart, {
