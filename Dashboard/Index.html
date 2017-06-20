@@ -253,7 +253,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
     <script>
-        var selectedIndex = null;
+        var selectedIndex1 = null, selectedIndex2 = null;
         var pieChart1 = $("#myChart1");
         var myChart1 = new Chart(pieChart1, {
             type: 'pie',
@@ -282,12 +282,12 @@
                     if (elements && elements.length) {
                         var segment = elements[0];
                         myChart1.update();
-                        if (selectedIndex !== segment["_index"]) {
-                            selectedIndex = segment["_index"];
+                        if (selectedIndex1 !== segment["_index"]) {
+                            selectedIndex1 = segment["_index"];
                             segment._model.outerRadius += 10;
                         }
                         else {
-                            selectedIndex = null;
+                            selectedIndex1 = null;
                         }
                     }
                 },
@@ -321,12 +321,12 @@
                     if (elements && elements.length) {
                         var segment = elements[0];
                         myChart2.update();
-                        if (selectedIndex !== segment["_index"]) {
-                            selectedIndex = segment["_index"];
+                        if (selectedIndex2 !== segment["_index"]) {
+                            selectedIndex2 = segment["_index"];
                             segment._model.outerRadius += 10;
                         }
                         else {
-                            selectedIndex = null;
+                            selectedIndex2 = null;
                         }
                     }
                 },
