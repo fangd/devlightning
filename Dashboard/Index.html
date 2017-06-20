@@ -76,6 +76,14 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
                 <div class="row placeholders">
+                    
+                    <!--<div class="col-xs-6 col-sm-3 chartjs-wrapper">
+                        
+                        <canvas id="chartjs-4" class="chartjs" width="464" height="232" style="display: block; width: 464px; height: 232px;"></canvas>
+                        <script>new Chart(document.getElementById("chartjs-4"), { "type": "doughnut", "data": { "labels": ["Red", "Blue", "Yellow"], "datasets": [{ "label": "My First Dataset", "data": [300, 50, 100], "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"] }] } });</script>
+                        <h4>Chart1</h4>
+                        <span class="text-muted">Chart 1 place</span>                    
+                    </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                         <h4>Label</h4>
@@ -85,6 +93,16 @@
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                         <h4>Label</h4>
                         <span class="text-muted">Something else</span>
+                    </div>-->
+                    <div class="col-xs-6 col-sm-3">
+                        <canvas id="myChart2"></canvas>
+                        <h4>Pie Chart</h4>
+                        <span class="text-muted">Pie chart</span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <canvas id="myChart3"></canvas>
+                        <h4>Pie Chart2</h4>
+                        <span class="text-muted">Pie chart2</span>
                     </div>
                     <div class="col-xs-6 col-sm-6">
                         <canvas id="myChart"></canvas>
@@ -239,6 +257,64 @@
     <script src="/js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+    var pieChart = $("#myChart3");
+    var myChart3 = new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [10, 20, 30]
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            backgroundColor: [
+
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)',
+                'rgb(255, 159, 64)'
+            ]
+        },
+        options: Chart.defaults.pie
+    });
+
+    </script>
+    <script>
+    var pieChart = $("#myChart2");
+    var myChart2 = new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [10, 20, 30]
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Red',
+                'Yellow',
+                'Blue'
+            ],
+            backgroundColor: [
+
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+        },
+        options: Chart.defaults.pie
+    });
+
+    </script>
     <script>
     var lineChart = $("#myChart");
     var myChart = new Chart(lineChart, {
