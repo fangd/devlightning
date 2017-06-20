@@ -11,4 +11,4 @@ Data Fields:
   sender_zipcode;
   receiver_fname;
   receiver_lname;
-  receriver_zipcode;
+  receiver_zipcode;
