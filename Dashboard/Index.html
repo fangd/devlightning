@@ -95,17 +95,17 @@
                         <span class="text-muted">Something else</span>
                     </div>-->
                     <div class="col-xs-6 col-sm-3">
-                        <canvas id="myChart2"></canvas>
+                        <canvas id="myChart1"></canvas>
                         <h4>Pie Chart</h4>
                         <span class="text-muted">Pie chart</span>
                     </div>
                     <div class="col-xs-6 col-sm-3">
-                        <canvas id="myChart3"></canvas>
+                        <canvas id="myChart2"></canvas>
                         <h4>Pie Chart2</h4>
                         <span class="text-muted">Pie chart2</span>
                     </div>
                     <div class="col-xs-6 col-sm-6">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="myChart3"></canvas>
                         <h4>Line Chart</h4>
                         <span class="text-muted">My line chart</span>
                     </div>
@@ -258,94 +258,92 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
     <script>
-    var pieChart = $("#myChart3");
-    var myChart3 = new Chart(pieChart, {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [10, 20, 30]
-            }],
 
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            backgroundColor: [
+        var pieChart1 = $("#myChart1");
+        var myChart1 = new Chart(pieChart1, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [10, 20, 30],
+                    backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }],
 
-                'rgb(75, 192, 192)',
-                'rgb(153, 102, 255)',
-                'rgb(255, 159, 64)'
-            ]
-        },
-        options: Chart.defaults.pie
-    });
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
 
-    </script>
-    <script>
-    var pieChart = $("#myChart2");
-    var myChart2 = new Chart(pieChart, {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [10, 20, 30]
-            }],
+            },
+            options: Chart.defaults.pie
+        });
 
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ],
-            backgroundColor: [
+        var pieChart2 = $("#myChart2");
+        var myChart2 = new Chart(pieChart2, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [10, 20, 30],
+                    backgroundColor: [
 
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                    ]
+                }],
 
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-        },
-        options: Chart.defaults.pie
-    });
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
+            },
+            options: Chart.defaults.pie
+        });
 
-    </script>
-    <script>
-    var lineChart = $("#myChart");
-    var myChart = new Chart(lineChart, {
-        type: 'line',
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [{
-                label: 'Volume of Transactions',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: 'rgba(122, 140, 230, 1)',
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+    
+
+        var lineChart = $("#myChart3");
+        var myChart = new Chart(lineChart, {
+            type: 'line',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June"],
+                datasets: [{
+                    label: 'Volume of Transactions',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(122, 140, 230, 1)',
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
-        }
-    });
+        });
     </script>
 </body>
 </html>
