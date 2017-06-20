@@ -76,6 +76,14 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
                 <div class="row placeholders">
+                    
+                    <div class="col-xs-6 col-sm-3 chartjs-wrapper">
+                        <!--<iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>-->
+                        <canvas id="chartjs-4" class="chartjs" width="464" height="232" style="display: block; width: 464px; height: 232px;"></canvas>
+                        <script>new Chart(document.getElementById("chartjs-4"), { "type": "doughnut", "data": { "labels": ["Red", "Blue", "Yellow"], "datasets": [{ "label": "My First Dataset", "data": [300, 50, 100], "backgroundColor": ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"] }] } });</script>
+                        <h4>Chart1</h4>
+                        <span class="text-muted">Chart 1 place</span>                    
+                    </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                         <h4>Label</h4>
