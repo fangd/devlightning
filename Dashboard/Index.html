@@ -36,18 +36,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">Transaction Analysis Report</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
+                <!--<ul class="nav navbar-nav navbar-right">
+                   <li><a href="#">Overall Transactions</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Help</a></li>
-                </ul>
-                <form class="navbar-form navbar-right">
+                </ul>-->
+                <!--<form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
-                </form>
+                </form>-->
             </div>
         </div>
     </nav>
@@ -55,12 +55,14 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Export</a></li>
+                    <li class="active"><a href="#">LOB Name<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">LOB1</a></li>
+                    <li><a href="#">LOB2</a></li>
+                    <li><a href="#">LOB3</a></li>
+                    <li><a href="#">LOB4</a></li>
+                    <li><a href="#">LOB5</a></li>
                 </ul>
-                <ul class="nav nav-sidebar">
+               <!-- <ul class="nav nav-sidebar">
                     <li><a href="">Nav item</a></li>
                     <li><a href="">Nav item again</a></li>
                     <li><a href="">One more nav</a></li>
@@ -71,10 +73,10 @@
                     <li><a href="">Nav item again</a></li>
                     <li><a href="">One more nav</a></li>
                     <li><a href="">Another nav item</a></li>
-                </ul>
+                </ul>-->
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header">Overall Transactions</h1>
                 <div class="row placeholders">
                     
                     <!--<div class="col-xs-6 col-sm-3 chartjs-wrapper">
@@ -96,26 +98,21 @@
                     </div>-->
                     <div class="col-xs-6 col-sm-3">
                         <canvas id="myChart1"></canvas>
-                        <h4>Pie Chart</h4>
-                        <span class="text-muted">Pie chart</span>
+                       <!--<h4>Pie Chart</h4>-->
+                        <span class="text-bold">Total Transaction</span>
                     </div>
                     <div class="col-xs-6 col-sm-3">
                         <canvas id="myChart2"></canvas>
-                        <h4>Pie Chart2</h4>
-                        <span class="text-muted">Pie chart2</span>
+                        <!--<h4>Pie Chart2</h4>-->
+                        <span class="text-bold">Higher vs. Lower Volume</span>
                     </div>
                     <div class="col-xs-6 col-sm-6">
                         <canvas id="myChart3"></canvas>
-                        <h4>Line Chart</h4>
-                        <span class="text-muted">My line chart</span>
+                        <!--<h4>Line Chart</h4>-->
+                        <span class="text-bold">Transaction Trend</span>
                     </div>
-                    <!--<div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                        <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
-                    </div>-->
                 </div>
-                <h2 class="sub-header">Section title</h2>
+                <h2 class="sub-header">Top Ten Transactions</h2>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -258,7 +255,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
     <script>
-
+        var selectedIndex1 = null, selectedIndex2 = null;
         var pieChart1 = $("#myChart1");
         var myChart1 = new Chart(pieChart1, {
             type: 'pie',
@@ -276,16 +273,30 @@
                         'rgba(255, 159, 64, 1)'
                     ]
                 }],
-
-                // These labels appear in the legend and in the tooltips when hovering different arcs
                 labels: [
                     'Red',
                     'Yellow',
                     'Blue'
                 ]
-
             },
-            options: Chart.defaults.pie
+            options: {
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart1.update();
+                        if (selectedIndex1 !== segment["_index"]) {
+                            selectedIndex1 = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex1 = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
         });
 
         var pieChart2 = $("#myChart2");
@@ -295,13 +306,11 @@
                 datasets: [{
                     data: [10, 20, 30],
                     backgroundColor: [
-
                     'rgb(75, 192, 192)',
                     'rgb(153, 102, 255)',
                     'rgb(255, 159, 64)'
                     ]
                 }],
-
                 // These labels appear in the legend and in the tooltips when hovering different arcs
                 labels: [
                     'Red',
@@ -310,12 +319,24 @@
                 ]
             },
             options: {
-                //Chart.defaults.pie,
-                animation:{animateRotate: true, animateScale: true}
-        }
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart2.update();
+                        if (selectedIndex2 !== segment["_index"]) {
+                            selectedIndex2 = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex2 = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
         });
-
-    
 
         var lineChart = $("#myChart3");
         var myChart = new Chart(lineChart, {
