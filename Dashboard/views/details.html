@@ -1,3 +1,12 @@
-﻿<div>
-
+﻿<div class="jumbotron text-center">
+    <h1>Transaction Details</h1>
+    <div>ID: {{ transactionId }}</div>
+    <div>LOB: {{ rec.lob }}</div>
+    <div>{{ rec.sender_fname }}</div>
+    <div>{{ rec.sender_lname }}</div>
+    <div>{{ rec.receiver_fname }}</div>
+    <div>{{ rec.receiver_lname }}</div>
+    <div>{{ rec.amount }}</div>
+    <div>{{ rec.date }}</div>
+    <div>{{ rec.priority }}</div>
 </div>

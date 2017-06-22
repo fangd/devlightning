@@ -14,7 +14,11 @@
         }).when('/faq', {
             templateUrl: 'views/faq.html',
             controller: 'faqController'
-        }).otherwise({ redirectTo: '/' });
+        }).when('/details/:transaction_id', {
+            templateUrl: 'views/details.html',
+            controller: 'detailsController'
+        })
+        .otherwise({ redirectTo: '/' });
     });
     
     demoApp.controller('homeController', function ($scope) {
@@ -28,7 +32,8 @@
     demoApp.controller('transactionsController', function ($scope) {        
         var selectedIndex1 = null, selectedIndex2 = null;
         var pieChart1 = $("#myChart1");
-        var jsondata = getJSONData(); $scope.records = jsondata;
+        var jsondata = getJSONData();
+        $scope.records = jsondata; console.log($scope.records);
         var jsonTotal = jsondata.length;
         var lobVolume = [];
         $scope.selectedLOB = '';
@@ -70,7 +75,6 @@
                             }
                         });
                         
-
                         myChart1.update();
                         if (selectedIndex1 !== segment["_index"]) {
                             selectedIndex1 = segment["_index"];
@@ -163,9 +167,20 @@
         });    
     });
 
+    demoApp.controller('detailsController', function ($scope, $routeParams) {
+        var transactionId = ($routeParams.transaction_id) ? parseInt($routeParams.transaction_id) : 0;
+        console.log(transactionId);
+        console.log($scope);
+        console.log($scope.records);
+        //var s = $.grep($scope.records, function (x) { return x.transaction_id == transactionId; });
+        //$scope.record = $filter('filter')(rec.results, { transaction_id: transactionId });
+        //console.log($scope.record);
+    });
+
     demoApp.controller('aboutController', function ($scope) {
         $scope.message = 'About Controller View';
     });
+
     demoApp.controller('faqController', function ($scope) {
         $scope.message = 'FAQ Controller View';
     });
