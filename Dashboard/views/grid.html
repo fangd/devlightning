@@ -1,3 +1,115 @@
-﻿<div>
+﻿<script>
+        var selectedIndex1 = null, selectedIndex2 = null;
+        var pieChart1 = $("#myChart1");
+        var myChart1 = new Chart(pieChart1, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [10, 20, 30],
+                    backgroundColor: [
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }],
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
+            },
+            options: {
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart1.update();
+                        if (selectedIndex1 !== segment["_index"]) {
+                            selectedIndex1 = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex1 = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
+        });
 
-</div>
+        var pieChart2 = $("#myChart2");
+        var myChart2 = new Chart(pieChart2, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [10, 20, 30],
+                    backgroundColor: [
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                    ]
+                }],
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: [
+                    'Red',
+                    'Yellow',
+                    'Blue'
+                ]
+            },
+            options: {
+                onClick: function (evt, elements) {
+                    if (elements && elements.length) {
+                        var segment = elements[0];
+                        myChart2.update();
+                        if (selectedIndex2 !== segment["_index"]) {
+                            selectedIndex2 = segment["_index"];
+                            segment._model.outerRadius += 10;
+                        }
+                        else {
+                            selectedIndex2 = null;
+                        }
+                    }
+                },
+                layout: {
+                    padding: { bottom: 10 }
+                }
+            }
+        });
+
+        var lineChart = $("#myChart3");
+        var myChart = new Chart(lineChart, {
+            type: 'line',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June"],
+                datasets: [{
+                    label: 'Volume of Transactions',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: 'rgba(122, 140, 230, 1)',
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+</script>
