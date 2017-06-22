@@ -41,7 +41,7 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div id="navSideBar" class="col-sm-3 col-md-2 sidebar">
+            <div id="navSideBar" class="sidebar">
                 <ul class="nav nav-sidebar">
                     <li ng-class="{'active':highlight('/home')}"><a href="#/home">Home</a></li>
                     <li ng-class="{'active':highlight('/transactions')}"><a href="#/transactions">Transaction Reporting</a></li>
@@ -49,9 +49,9 @@
                     <li ng-class="{'active':highlight('/faq')}"><a href="#/faq">FAQ</a></li>
                 </ul>
             </div>
-            <div class="container">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div ng-view class="slide-animation"></div>
-                </div>
+            </div>
                 <!---->
             </div>
     </div>
