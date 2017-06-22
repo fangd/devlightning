@@ -29,11 +29,11 @@
         'Brownie cake marzipan cake jelly-o marzipan I love lollipop I love. Cookie chocolate bar powder gummies sweet roll candy canes carrot cake. Pie fruitcake danish icing. Cheesecake sesame snaps bear claw chocolate cake liquorice I love fruitcake powder. Tiramisu I love bear claw marshmallow pie. Donut apple pie cotton candy topping marshmallow donut. Chocolate bar icing caramels macaroon donut lemon drops marshmallow tiramisu. Oat cake tart croissant. Cheesecake I love fruitcake soufflé. Candy canes ice cream gummi bears carrot cake candy cake. Cupcake liquorice apple pie dragée danish. Croissant pudding jujubes tart sugar plum. Chocolate bar pie bonbon sugar plum dessert sesame snaps. Dessert jujubes tiramisu dragée.';
     });
 
-    demoApp.controller('transactionsController', function ($scope) {        
+    demoApp.controller('transactionsController', function ($scope, $rootScope) {
         var selectedIndex1 = null, selectedIndex2 = null;
         var pieChart1 = $("#myChart1");
         var jsondata = getJSONData();
-        $scope.records = jsondata; console.log($scope.records);
+        $rootScope.records = jsondata;
         var jsonTotal = jsondata.length;
         var lobVolume = [];
         var priorityVolume = [];
@@ -174,14 +174,13 @@
         });    
     });
 
-    demoApp.controller('detailsController', function ($scope, $routeParams) {
+    demoApp.controller('detailsController', function ($rootScope, $scope, $routeParams) {
         var transactionId = ($routeParams.transaction_id) ? parseInt($routeParams.transaction_id) : 0;
-        console.log(transactionId);
-        console.log($scope);
-        console.log($scope.records);
-        //var s = $.grep($scope.records, function (x) { return x.transaction_id == transactionId; });
+        //console.log(transactionId);
+        //console.log($rootScope);
+        //console.log($rootScope.records);
+        $scope.record = $.grep($rootScope.records, function (x) { return x.transaction_id == transactionId; })[0];
         //$scope.record = $filter('filter')(rec.results, { transaction_id: transactionId });
-        //console.log($scope.record);
     });
 
     demoApp.controller('aboutController', function ($scope) {
