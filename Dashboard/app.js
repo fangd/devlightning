@@ -30,8 +30,10 @@
         var jsondata = getJSONData();
         var jsonTotal = jsondata.length;
         var lobVolume = [];
+        var priorityVolume = [];
         //Getting a unique list of LOBs here
         var uniqueLobs = $.unique(jsondata.map(function (d) { return d.lob; })).sort();
+        var uniquePriorities = [true, false];
         //Looping through each unique LOB here
         $.each(uniqueLobs, function (index, value) {
             //Grab all data from the CURRENT looped LOB
@@ -44,6 +46,19 @@
             //Store into lob (lobname, volume) into new array
             lobVolume.push(lob);
         });
+        $.each(uniquePriorities, function (index, value) {
+            //Grab all data from the CURRENT looped LOB
+            var prioritydata = $.grep(jsondata, function (x) { return x.priority == value; });
+            //Store lob and total volume of that LOB transaction
+            var priority = {
+                priority: value,
+                volume: prioritydata.length
+            };
+            //Store into lob (lobname, volume) into new array
+            priorityVolume.push(priority);
+        });
+        console.log(uniquePriorities);
+        console.log(priorityVolume);
         var myChart1 = new Chart(pieChart1, {
             type: 'pie',
             data: {
@@ -87,19 +102,13 @@
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [10, 20, 30],
-                    backgroundColor: [
-                    'rgb(75, 192, 192)',
-                    'rgb(153, 102, 255)',
-                    'rgb(255, 159, 64)'
-                    ]
+                    data: priorityVolume.map(function (y) { return y.volume}),
+                    
+                    backgroundColor: ['red','blue' ]
                 }],
                 // These labels appear in the legend and in the tooltips when hovering different arcs
-                labels: [
-                    'Red',
-                    'Yellow',
-                    'Blue'
-                ]
+                labels:[ 'High', 'Low']
+                    //priorityVolume.map(function (y) { return y.volume })
             },
             options: {
                 onClick: function (evt, elements) {
