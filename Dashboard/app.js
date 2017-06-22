@@ -102,6 +102,7 @@
                     padding: { bottom: 10 }
                 },
                 legend: {
+                    //display: false,
                     labels: {
                         boxWidth: 10
                     }
@@ -176,23 +177,20 @@
 
     demoApp.controller('detailsController', function ($rootScope, $scope, $routeParams) {
         var transactionId = ($routeParams.transaction_id) ? parseInt($routeParams.transaction_id) : 0;
-        //console.log(transactionId);
-        //console.log($rootScope);
-        //console.log($rootScope.records);
         $scope.record = $.grep($rootScope.records, function (x) { return x.transaction_id == transactionId; })[0];
-        //$scope.record = $filter('filter')(rec.results, { transaction_id: transactionId });
     });
 
     demoApp.controller('aboutController', function ($scope) {
-        $scope.message = 'About Controller View';
+        $scope.header = 'About';
+        $scope.message = 'Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.' +
+        'Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.' +
+        'Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.';
     });
 
     demoApp.controller('faqController', function ($scope) {
-        $scope.message = 'FAQ Controller View';
+        $scope.header = 'FAQ';
+        $scope.message = 'Spicy jalapeno bacon ipsum dolor amet short loin pork belly sirloin, shank filet mignon jerky kielbasa frankfurter t-bone shankle shoulder alcatra bresaola porchetta rump. Alcatra ground round cupim, pancetta ham hock beef tenderloin turducken frankfurter leberkas kevin corned beef meatball prosciutto. Bacon pig frankfurter jerky sirloin drumstick. Hamburger shank bresaola flank pork chop chuck, salami kielbasa capicola jowl doner cupim sirloin andouille biltong. Corned beef pig tongue, short loin meatloaf pork loin pork belly kevin pork chop leberkas boudin shoulder burgdoggen. Tail pork turkey salami flank.';
     });
 
-    //$scope.isSelectedLOB = function (selectLOB) {
-    //    return 
-    //};
 
 }());
