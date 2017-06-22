@@ -1,5 +1,5 @@
 ﻿(function () {
-    var demoApp = angular.module('demoApp', ['ngRoute']);
+    var demoApp = angular.module('demoApp', ['ngRoute', 'ngAnimate']);
 
     demoApp.config(function ($routeProvider) {
         $routeProvider.when('/', {
@@ -16,7 +16,7 @@
             controller: 'faqController'
         }).otherwise({ redirectTo: '/' });
     });
-
+    
     demoApp.controller('homeController', function ($scope) {
         $scope.message = 'Oat cake muffin cookie. Ice cream wafer I love marzipan. Oat cake jelly-o jelly beans dragée dessert powder pie donut toffee. Caramels sweet roll jelly fruitcake powder. Dragée donut gummi bears caramels I love. Cotton candy gummi bears dessert muffin bonbon toffee brownie gingerbread. Jelly bear claw lemon drops carrot cake biscuit chocolate bar ice cream I love. I love brownie chocolate cake sugar plum cake cake tiramisu wafer I love. Candy chocolate cake croissant I love powder macaroon. Jelly-o candy canes gummi bears jelly croissant croissant dragée cookie gingerbread. Jelly candy jelly beans toffee wafer cake chocolate cake I love chupa chups. Fruitcake tootsie roll cookie jelly. Gummi bears soufflé brownie tiramisu.' +
         'Gummi bears chocolate cake donut. Cheesecake toffee cheesecake tootsie roll tart bear claw chupa chups. Candy canes pie cupcake carrot cake powder. Soufflé cupcake I love brownie dessert pudding danish carrot cake. Wafer marshmallow jujubes. Dragée jelly beans ice cream chocolate icing cupcake croissant. Lollipop dragée bonbon toffee icing chocolate. Chocolate cake croissant powder icing. Jujubes fruitcake tart halvah. Pastry I love biscuit lollipop oat cake sesame snaps oat cake lemon drops marzipan. Oat cake sweet caramels soufflé dessert jelly-o. Topping sweet I love tootsie roll.' +
@@ -24,12 +24,14 @@
         'I love sesame snaps I love. Macaroon I love candy canes gingerbread. Jujubes chocolate sesame snaps croissant pudding toffee. Sesame snaps I love candy I love bear claw icing donut. Sesame snaps toffee icing. Topping marshmallow chupa chups muffin marzipan sweet roll croissant dragée. Tootsie roll muffin tootsie roll gummi bears jelly beans pie cookie pastry cotton candy. Croissant I love cheesecake. I love halvah chupa chups chocolate cake I love chupa chups. Pudding topping tart chupa chups. Brownie sugar plum I love jelly chocolate jelly beans I love donut. Dessert jelly gingerbread. Tiramisu gingerbread lollipop chocolate candy sugar plum.' +
         'Brownie cake marzipan cake jelly-o marzipan I love lollipop I love. Cookie chocolate bar powder gummies sweet roll candy canes carrot cake. Pie fruitcake danish icing. Cheesecake sesame snaps bear claw chocolate cake liquorice I love fruitcake powder. Tiramisu I love bear claw marshmallow pie. Donut apple pie cotton candy topping marshmallow donut. Chocolate bar icing caramels macaroon donut lemon drops marshmallow tiramisu. Oat cake tart croissant. Cheesecake I love fruitcake soufflé. Candy canes ice cream gummi bears carrot cake candy cake. Cupcake liquorice apple pie dragée danish. Croissant pudding jujubes tart sugar plum. Chocolate bar pie bonbon sugar plum dessert sesame snaps. Dessert jujubes tiramisu dragée.';
     });
+
     demoApp.controller('transactionsController', function ($scope) {        
         var selectedIndex1 = null, selectedIndex2 = null;
         var pieChart1 = $("#myChart1");
-        var jsondata = getJSONData();
+        var jsondata = getJSONData(); $scope.records = jsondata;
         var jsonTotal = jsondata.length;
         var lobVolume = [];
+        $scope.selectedLOB = '';
         //Getting a unique list of LOBs here
         var uniqueLobs = $.unique(jsondata.map(function (d) { return d.lob; })).sort();
         //Looping through each unique LOB here
@@ -44,16 +46,13 @@
             //Store into lob (lobname, volume) into new array
             lobVolume.push(lob);
         });
+
         var myChart1 = new Chart(pieChart1, {
             type: 'pie',
             data: {
                 datasets: [{
                     data: lobVolume.map(function (x) { return x.volume }),
-                    backgroundColor: [ 'red','blue','green','yellow','orange'
-                    //'rgba(75, 192, 192, 0.5)',
-                    //'rgba(153, 102, 255, 0.5)',
-                    //'rgba(255, 159, 64, 0.5)'
-                    ]
+                    backgroundColor: [ 'red','blue','green','yellow','orange']
                 }],
                 labels: lobVolume.map(function (x) { return x.lob })
             },
@@ -61,6 +60,17 @@
                 onClick: function (evt, elements) {
                     if (elements && elements.length) {
                         var segment = elements[0];
+
+                        $scope.$apply(function () {
+                            if ($scope.selectedLOB != segment['_view'].label) {
+                                $scope.selectedLOB = segment['_view'].label;
+                            }
+                            else {
+                                $scope.selectedLOB = null;
+                            }
+                        });
+                        
+
                         myChart1.update();
                         if (selectedIndex1 !== segment["_index"]) {
                             selectedIndex1 = segment["_index"];
@@ -150,14 +160,18 @@
                     }]
                 }
             }
-        });
-        
+        });    
     });
+
     demoApp.controller('aboutController', function ($scope) {
         $scope.message = 'About Controller View';
     });
     demoApp.controller('faqController', function ($scope) {
         $scope.message = 'FAQ Controller View';
     });
+
+    //$scope.isSelectedLOB = function (selectLOB) {
+    //    return 
+    //};
 
 }());
